@@ -1,4 +1,3 @@
-from flask import Flask
 from flask import Flask, request
 from PIL import Image
 import numpy as np
@@ -77,7 +76,7 @@ def predict():
     predString = "{}".format(predict)
     print(predString)
     #return predString[3:-2]
-    return predict
+    return predict[2:-2]
 
 
 if __name__ == '__main__':
