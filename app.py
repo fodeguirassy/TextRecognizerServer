@@ -75,8 +75,7 @@ def predict():
     print(predict)
     predString = "{}".format(predict)
     print(predString)
-    #return predString[3:-2]
-    return predict[2:-2]
+    return predString[2:-2]
 
 
 if __name__ == '__main__':
