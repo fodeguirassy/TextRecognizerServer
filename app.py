@@ -48,5 +48,37 @@ def hello_world():
     return 'Hello World!'
 
 
+@app.route("/add", methods=["POST"])
+def add_example():
+    json = request.get_json(force=True)
+
+    # print(json["data"])
+    # print(json["label"])
+
+    new_model = np.array(json["data"])
+    new_label = json["label"]
+
+    raw_models_array.append(new_model)
+    labels_array.append(new_label)
+
+    new_arr = np.array(raw_models_array)
+    clf.fit(new_arr, labels_array)
+
+    return new_label
+
+
+@app.route("/predict", methods=["POST"])
+def predict():
+    json = request.get_json(force=True)
+    new = np.array(json["data"])
+    new = new.reshape((1, -1))
+    predict = clf.predict(new)
+    print(predict)
+    predString = "{}".format(predict)
+    print(predString)
+    #return predString[3:-2]
+    return predict
+
+
 if __name__ == '__main__':
     app.run()
