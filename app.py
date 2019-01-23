@@ -1,7 +1,7 @@
 from flask import Flask, request
 from PIL import Image
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
 
 app = Flask(__name__)
 
@@ -38,7 +38,7 @@ for i in range(row_max):
     y_start = y_start + 120
 
 models_array = np.array(models_array)
-clf = RandomForestClassifier(n_estimators=100, max_depth=2, random_state=0, min_samples_leaf=1)
+clf = SVC(kernel="linear", C=0.025)
 clf.fit(models_array, labels_array)
 
 
